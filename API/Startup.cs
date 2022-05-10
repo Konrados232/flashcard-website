@@ -1,27 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace API
 {
 	public class Startup
 	{
+		private readonly IConfiguration _configuration;
+		private const string _originHost = "http://localhost:3000";
+		
 		public Startup(IConfiguration configuration)
 		{
-			Configuration = configuration;
+			_configuration = configuration;
 		}
 
-		public IConfiguration Configuration { get; }
 
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
@@ -32,7 +24,19 @@ namespace API
 			{
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv5", Version = "v1" });
 			});
-		
+			
+			services.AddDbContext<DataContext>(c => 
+			{
+				c.UseSqlite(_configuration.GetConnectionString("DefaultConnection"));
+			});
+			
+			services.AddCors(opt => 
+			{
+				opt.AddPolicy("CorsPolicy", policy => 
+				{
+					policy.AllowAnyMethod().AllowAnyHeader().WithOrigins(_originHost);
+				});
+			});
 			
 		}
 
@@ -50,6 +54,8 @@ namespace API
 
 			app.UseRouting();
 
+			app.UseCors("CorsPolicy");
+			
 			app.UseAuthorization();
 
 			app.UseEndpoints(endpoints =>
