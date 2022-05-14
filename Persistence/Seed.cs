@@ -12,39 +12,10 @@ namespace Persistence
 			}
 			
 			var flashcards = new List<Flashcard>();
-			flashcards.Add(new Flashcard 
-			{
-				Title = "Sample",
-				Date = DateTime.Now.AddDays(1),
-				Description = "Something there",
-				Content = "Something there also",
-			});
-			
-			flashcards.Add(new Flashcard 
-			{
-				Title = "Sample2",
-				Date = DateTime.Now.AddDays(2),
-				Description = "Something there2",
-				Content = "Something there also",
-			});
-			
-			
-			flashcards.Add(new Flashcard 
-			{
-				Title = "Sample3",
-				Date = DateTime.Now.AddDays(3),
-				Description = "Something there3",
-				Content = "Something there also",
-			});
-			
-			
-			flashcards.Add(new Flashcard 
-			{
-				Title = "Sample4",
-				Date = DateTime.Now.AddDays(4),
-				Description = "Something there4",
-				Content = "Something there also",
-			});
+			flashcards.Add(new Flashcard(Guid.NewGuid(), "Sample", DateTime.Now.AddDays(1), "Something there", "Something there also"));
+			flashcards.Add(new Flashcard(Guid.NewGuid(), "Sample2", DateTime.Now.AddDays(2), "Something there", "Something there also"));
+			flashcards.Add(new Flashcard(Guid.NewGuid(), "Sample3", DateTime.Now.AddDays(3), "Something there", "Something there also"));
+			flashcards.Add(new Flashcard(Guid.NewGuid(), "Sample4", DateTime.Now.AddDays(4), "Something there", "Something there also"));
 			
 			await dataContext.Flashcards.AddRangeAsync(flashcards); // adding
 			await dataContext.SaveChangesAsync(); // saving database
