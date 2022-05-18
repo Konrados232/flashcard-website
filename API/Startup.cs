@@ -1,6 +1,8 @@
 using Microsoft.OpenApi.Models;
 using Persistence;
 using Microsoft.EntityFrameworkCore;
+using MediatR;
+using Application.Flashcards;
 
 namespace API
 {
@@ -37,6 +39,8 @@ namespace API
 					policy.AllowAnyMethod().AllowAnyHeader().WithOrigins(_originHost);
 				});
 			});
+			
+			services.AddMediatR(typeof(List.Handler).Assembly);
 			
 		}
 
