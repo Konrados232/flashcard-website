@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers
 {
 	public class FlashcardsController : BaseApiController
-	{			
+	{
 		
 		[HttpGet]
 		public async Task<ActionResult<List<Flashcard>>> GetFlashcards() 
@@ -29,6 +29,12 @@ namespace API.Controllers
 		public async Task<IActionResult> EditFlashcard(Guid id, Flashcard flashcard) 
 		{
 			return Ok(await Mediator.Send(new Edit.Command(id, flashcard)));
+		}
+		
+		[HttpDelete("{id}")]
+		public async Task<IActionResult> DeleteFlashcard(Guid id) 
+		{
+			return Ok(await Mediator.Send(new Delete.Command(id)));
 		}
 	}
 }
