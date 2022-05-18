@@ -16,8 +16,19 @@ namespace API.Controllers
 		[HttpGet("{id}")]
 		public async Task<ActionResult<Flashcard>> GetFlashcard(Guid id) 
 		{
-			return await Mediator.Send(new Detail.Query(id));
-		}		
+			return await Mediator.Send(new OneElement.Query(id));
+		}
 		
+		[HttpPost]
+		public async Task<IActionResult> CreateFlashcard(Flashcard flashcard) 
+		{
+			return Ok(await Mediator.Send(new Create.Command(flashcard)));
+		}
+		
+		[HttpPut("{id}")]
+		public async Task<IActionResult> EditFlashcard(Guid id, Flashcard flashcard) 
+		{
+			return Ok(await Mediator.Send(new Edit.Command(id, flashcard)));
+		}
 	}
 }
