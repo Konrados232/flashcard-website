@@ -25,6 +25,12 @@ namespace API.Controllers
 			return Ok(await Mediator.Send(new Create.Command(flashcard)));
 		}
 		
+		[HttpPost("list")]
+		public async Task<IActionResult> CreateFlashcardList(List<Flashcard> flashcards) 
+		{
+			return Ok(await Mediator.Send(new CreateList.Command(flashcards)));
+		}
+		
 		[HttpPut("{id}")]
 		public async Task<IActionResult> EditFlashcard(Guid id, Flashcard flashcard) 
 		{
