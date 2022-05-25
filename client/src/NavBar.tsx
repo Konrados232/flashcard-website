@@ -1,6 +1,6 @@
 import React from 'react';
 import AppBar from '@mui/material/AppBar';
-import { Badge, IconButton, Menu, MenuItem } from '@mui/material';
+import { Avatar, Badge, Box, IconButton, Menu, MenuItem } from '@mui/material';
 import Toolbar from '@mui/material/Toolbar';
 import { ThemeProvider } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
@@ -11,6 +11,8 @@ import { darkTheme } from './darkTheme';
 import Search from './Search';
 import SearchIconWrapper from './SearchIconWrapper';
 import StyledInputBase from './StyledInputBase';
+import CardMedia from '@mui/material/CardMedia';
+import { deepPurple, purple, yellow } from '@mui/material/colors';
 
 export default function NavBar() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -118,6 +120,16 @@ export default function NavBar() {
             <AppBar position="static" color="primary" enableColorOnDark>
                 <Toolbar>
 
+                    <IconButton
+                        size="large"
+                        edge="start"
+                        color="inherit"
+                        sx={{ mr: 2 }} >
+                        <img src={require("./assets/a.png")}
+                            width="100"
+                            height="50" />
+                    </IconButton>
+
                     <Search theme={darkTheme}>
                         <SearchIconWrapper>
                             <SearchIcon> </SearchIcon>
@@ -127,6 +139,21 @@ export default function NavBar() {
                             inputProps={{ "aria-label": "search" }} />
                     </Search>
 
+                    <Box sx={{ flexGrow: 1 }} />
+                    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+                        <IconButton
+                            size="large"
+                            edge="end"
+                            aria-label="account of current user"
+                            aria-controls={menuId}
+                            aria-haspopup="true"
+                            onClick={handleProfileMenuOpen}
+                            color="inherit"
+                        >
+                            <Avatar sx={{ bgcolor: yellow[500]}}>ME</Avatar>
+                        </IconButton>
+                    </Box>
+                   
 
                 </Toolbar>
             </AppBar>
