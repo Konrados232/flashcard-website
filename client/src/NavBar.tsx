@@ -1,6 +1,6 @@
 import React from 'react';
 import AppBar from '@mui/material/AppBar';
-import { Avatar, Badge, Box, IconButton, Menu, MenuItem } from '@mui/material';
+import { Avatar, Badge, Box, Divider, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
 import Toolbar from '@mui/material/Toolbar';
 import { ThemeProvider } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
@@ -13,6 +13,8 @@ import SearchIconWrapper from './SearchIconWrapper';
 import StyledInputBase from './StyledInputBase';
 import CardMedia from '@mui/material/CardMedia';
 import { deepPurple, purple, yellow } from '@mui/material/colors';
+import SideMenu from './SideMenu';
+
 
 export default function NavBar() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -117,18 +119,10 @@ export default function NavBar() {
 
     return (
         <ThemeProvider theme={darkTheme}>
-            <AppBar position="static" color="primary" enableColorOnDark>
+            <AppBar position="sticky" color="primary" enableColorOnDark>
                 <Toolbar>
 
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        sx={{ mr: 2 }} >
-                        <img src={require("./assets/a.png")}
-                            width="100"
-                            height="50" />
-                    </IconButton>
+                    <SideMenu />
 
                     <Search theme={darkTheme}>
                         <SearchIconWrapper>
