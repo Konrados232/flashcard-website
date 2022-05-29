@@ -6,7 +6,8 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { darkTheme } from './darkTheme';
 import MainGrid from './MainGrid';
-
+import AboutGrid from './AboutGrid';
+import MotivationGrid from './MotivationGrid';
 
 function Grid2() {
     return (
@@ -31,6 +32,7 @@ function Grid4() {
         </div>
     );
 }
+
 
 
 export default function SideMenu() {
@@ -97,11 +99,11 @@ export default function SideMenu() {
 
     const changeGrid = () => {
         switch(status) {
-          case "About":   return <MainGrid />;
+          case "About":   return <AboutGrid />;
           case "Test":   return <Grid2 />;
           case "Add Flashcard": return <Grid3 />;
           case "Delete Flashcard":  return <Grid4 />;
-          case "Motivation": return <Grid4 />;
+          case "Motivation": return <MotivationGrid />;
 
           default:      return <h1>No grid</h1>
         }
