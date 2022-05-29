@@ -5,6 +5,33 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { darkTheme } from './darkTheme';
+import MainGrid from './MainGrid';
+
+
+function Grid2() {
+    return (
+        <div>
+            Test2
+        </div>
+    );
+}
+
+function Grid3() {
+    return (
+        <div>
+            Test3
+        </div>
+    );
+}
+
+function Grid4() {
+    return (
+        <div>
+            Test4
+        </div>
+    );
+}
+
 
 export default function SideMenu() {
 
@@ -24,6 +51,10 @@ export default function SideMenu() {
     const firstStringList = ["About", "Test", "Add Flashcard", "Delete Flashcard"]
     const secondStringList = ["Motivation"]
 
+
+    const [status, setStatus] = React.useState("About");
+
+
     const list = () => (
         <Box
             sx={{ width: 250 }}
@@ -34,7 +65,9 @@ export default function SideMenu() {
             <List>
                 {firstStringList.map((text) => (
                     <ListItem key={text} disablePadding>
-                        <ListItemButton>
+                        <ListItemButton onClick={() =>
+                            setStatus(text)
+                        }>
                             <ListItemIcon>
                                 <InboxIcon />
                             </ListItemIcon>
@@ -47,7 +80,9 @@ export default function SideMenu() {
             <List>
                 {secondStringList.map((text) => (
                     <ListItem key={text} disablePadding>
-                        <ListItemButton>
+                        <ListItemButton onClick={() =>
+                            setStatus(text)
+                        }>
                             <ListItemIcon>
                                 <MailIcon />
                             </ListItemIcon>
@@ -58,6 +93,19 @@ export default function SideMenu() {
             </List>
         </Box>
     );
+
+
+    const changeGrid = () => {
+        switch(status) {
+          case "About":   return <MainGrid />;
+          case "Test":   return <Grid2 />;
+          case "Add Flashcard": return <Grid3 />;
+          case "Delete Flashcard":  return <Grid4 />;
+          case "Motivation": return <Grid4 />;
+
+          default:      return <h1>No grid</h1>
+        }
+      }
 
 
     return (
@@ -72,8 +120,10 @@ export default function SideMenu() {
                 <img src={require("./assets/a.png")}
                     width="100"
                     height="50" />
-                    
+
             </IconButton>
+
+
             <Drawer
                 anchor="left"
                 open={shown}
@@ -81,6 +131,12 @@ export default function SideMenu() {
             >
                 {list()}
             </Drawer>
+
+            <div>
+                { changeGrid() }
+            </div>
+
         </ThemeProvider>
+
     );
 };
