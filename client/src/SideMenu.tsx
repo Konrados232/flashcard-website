@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Box, Drawer, List, Divider, ListItem, ListItemButton, IconButton, ThemeProvider } from '@mui/material';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -7,7 +8,11 @@ import MailIcon from '@mui/icons-material/Mail';
 import { darkTheme } from './darkTheme';
 import MainGrid from './MainGrid';
 import AboutGrid from './AboutGrid';
+import AddFlashcardGrid from './AddFlashcardGrid';
+import DeleteFlashcardGrid from './DeleteFlashcardGrid';
 import MotivationGrid from './MotivationGrid';
+import ListFlashcardGrid from './ListFlashcardGrid';
+import { Flashcard } from './flashcard';
 
 function Grid2() {
     return (
@@ -37,6 +42,14 @@ function Grid4() {
 
 export default function SideMenu() {
 
+    const [flashcards, setFlashcards] = useState<Flashcard[]>([]);
+
+    useEffect(() => {
+        axios.get<Flashcard[]>("http://localhost:5000/api/flashcards").then(response => {
+            setFlashcards(response.data);
+        })
+    })
+
     const [shown, setShown] = useState(false);
 
     const toggleSideMenu = (isShown: boolean) =>
@@ -50,7 +63,7 @@ export default function SideMenu() {
         };
 
 
-    const firstStringList = ["About", "Test", "Add Flashcard", "Delete Flashcard"]
+    const firstStringList = ["About", "Test", "Add Flashcard", "Delete Flashcard", "List Flashcards"]
     const secondStringList = ["Motivation"]
 
 
@@ -101,8 +114,9 @@ export default function SideMenu() {
         switch(status) {
           case "About":   return <AboutGrid />;
           case "Test":   return <Grid2 />;
-          case "Add Flashcard": return <Grid3 />;
-          case "Delete Flashcard":  return <Grid4 />;
+          case "Add Flashcard": return <AddFlashcardGrid />;
+          case "Delete Flashcard":  return <DeleteFlashcardGrid />;
+          case "List Flashcards": return <ListFlashcardGrid flashcards={flashcards} />;
           case "Motivation": return <MotivationGrid />;
 
           default:      return <h1>No grid</h1>
