@@ -1,7 +1,7 @@
 export interface Flashcard {
-    id:          string;
+    readonly id:          string;
     title:       string;
-    date:        Date;
+    date:        string;
     description: string;
     content:     string;
 }
