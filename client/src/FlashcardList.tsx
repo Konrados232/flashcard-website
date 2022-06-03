@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import { darkTheme } from './darkTheme';
 import { Flashcard } from './flashcard';
@@ -7,16 +7,17 @@ import FlashcardCard from './FlashcardCard';
 
 interface Props {
     flashcards: Flashcard[];
+    handleCurrentFlashcard: (id: string) => void;
 }
 
-export default function FlashcardList({ flashcards }: Props) {
+export default function FlashcardList({ flashcards, handleCurrentFlashcard }: Props) {
 
     return (
         <ThemeProvider theme={darkTheme}>
 
             {flashcards.map(flashcard => (
                 <Card variant="outlined">
-                    <FlashcardCard flashcard={flashcard} />
+                    <FlashcardCard flashcard={flashcard} handleCurrentFlashcard={handleCurrentFlashcard} />
                 </Card>
             ))}
 

@@ -2,13 +2,14 @@ import React from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import { darkTheme } from './darkTheme';
 import { Flashcard } from './flashcard';
-import { CardContent, Typography } from '@mui/material';
+import { Button, CardActions, CardContent, Typography } from '@mui/material';
 
 interface Props {
     flashcard: Flashcard;
+    handleCurrentFlashcard: (id: string) => void;
 }
 
-export default function FlashcardCard({ flashcard }: Props) {
+export default function FlashcardCard({ flashcard, handleCurrentFlashcard }: Props) {
 
     return (
         <ThemeProvider theme={darkTheme}>
@@ -27,9 +28,9 @@ export default function FlashcardCard({ flashcard }: Props) {
                         {flashcard.date.toLocaleString()}
                     </Typography>
                 </CardContent>
-                {/* <CardActions>
-                    <Button size="small">Learn More</Button>
-                </CardActions> */}
+                <CardActions>
+                    <Button onClick={() => handleCurrentFlashcard(flashcard.id)} size="small">Edit</Button>
+                </CardActions>
             </React.Fragment>
         </ThemeProvider>
     );

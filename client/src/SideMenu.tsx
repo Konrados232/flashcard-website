@@ -22,33 +22,7 @@ function Grid2() {
     );
 }
 
-function Grid3() {
-    return (
-        <div>
-            Test3
-        </div>
-    );
-}
-
-function Grid4() {
-    return (
-        <div>
-            Test4
-        </div>
-    );
-}
-
-
-
 export default function SideMenu() {
-
-    const [flashcards, setFlashcards] = useState<Flashcard[]>([]);
-
-    useEffect(() => {
-        axios.get<Flashcard[]>("http://localhost:5000/api/flashcards").then(response => {
-            setFlashcards(response.data);
-        })
-    })
 
     const [shown, setShown] = useState(false);
 
@@ -110,18 +84,36 @@ export default function SideMenu() {
     );
 
 
-    const changeGrid = () => {
-        switch(status) {
-          case "About":   return <AboutGrid />;
-          case "Test":   return <Grid2 />;
-          case "Add Flashcard": return <AddFlashcardGrid />;
-          case "Delete Flashcard":  return <DeleteFlashcardGrid />;
-          case "List Flashcards": return <ListFlashcardGrid flashcards={flashcards} />;
-          case "Motivation": return <MotivationGrid />;
 
-          default:      return <h1>No grid</h1>
+    const [flashcards, setFlashcards] = useState<Flashcard[]>([]);
+
+    function handleFlashcardsChange(flashcard: Flashcard) { 
+        flashcard.id ? setFlashcards([...flashcards.filter(x => x.id !== flashcard.id), flashcard]) : setFlashcards([...flashcards, flashcard]);
+    }
+
+
+    useEffect(() => {
+        axios.get<Flashcard[]>("http://localhost:5000/api/flashcards").then(response => {
+            setFlashcards(response.data);
+        })
+    }, []);
+
+    const changeGrid = () => {
+        switch (status) {
+            case "About": return <AboutGrid />;
+            case "Test": return <Grid2 />;
+            case "Add Flashcard": return <AddFlashcardGrid flashcards={flashcards} />;
+            case "Delete Flashcard": return <DeleteFlashcardGrid />;
+
+            case "List Flashcards": return <ListFlashcardGrid
+                flashcards={flashcards}
+                handleFlashcardsChange={handleFlashcardsChange}
+            />;
+            case "Motivation": return <MotivationGrid />;
+
+            default: return <h1>No grid</h1>
         }
-      }
+    }
 
 
     return (
@@ -149,7 +141,7 @@ export default function SideMenu() {
             </Drawer>
 
             <div>
-                { changeGrid() }
+                {changeGrid()}
             </div>
 
         </ThemeProvider>

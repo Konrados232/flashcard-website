@@ -8,16 +8,15 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { ThemeProvider } from '@mui/material/styles';
 import { darkTheme } from './darkTheme';
+import SendIcon from '@mui/icons-material/Send';
+import { Flashcard } from './flashcard';
 
-export default function AddFlashcardGrid() {
+interface Props {
+    flashcards: Flashcard[];
+}
+
+export default function AddFlashcardGrid({ flashcards }: Props) {
     
-    const [status, setStatus] = useState('motivated');
-
-    // const [name, setName] = React.useState('Cat in the Hat');
-    // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //   setName(event.target.value);
-    // };
-
     return (
         <ThemeProvider theme={darkTheme}>
             <Container component="main" maxWidth="lg">
@@ -46,36 +45,46 @@ export default function AddFlashcardGrid() {
                     <Box
                         component="form"
                         sx={{
-                            '& > :not(style)': { m: 1, width: '25ch' },
+                            '& .MuiTextField-root': { m: 1, width: '25ch' },
                         }}
                         noValidate
                         autoComplete="off"
+                        alignItems="center"
+                        justifyContent="center"
                     >
-                        <TextField
-                            id="outlined-first"
-                            label="First"
-                            variant="filled"
-                        />
-                        <TextField
-                            id="outlined-second"
-                            label="Second"
-                            variant="filled"
-                        />
+                        <div>
+                            <TextField
+                                required
+                                id="flashcard-title"
+                                label="Title"
+                                defaultValue=" "
+                            />
+                            <TextField
+                                required
+                                id="flashcard-content"
+                                label="Content"
+                                defaultValue=" "
+                            />
+                            <TextField
+                                required
+                                id="flashcard-description"
+                                label="Description"
+                                defaultValue=" "
+                            />
+                            {/* TO-DO add datepicker */}
+                            <TextField
+                                required
+                                id="flashcard-date"
+                                label="Date"
+                                defaultValue=" "
+                            />
+                        </div>
+
                     </Box>
 
-                    <Button
-                        variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
-                        color="primary"
-                        onClick={() =>
-                            setStatus((current) =>
-                                current === 'motivated' ? 'unmotivated' : 'motivated',
-                            )
-                        }
-                    >
-                        {status === 'motivated' ? 'LOSE MOTIVATION' : 'GAIN MOTIVATION'}
+                    <Button variant="contained" endIcon={<SendIcon />}>
+                        Add Flashcard
                     </Button>
-
 
                 </Box>
 
