@@ -13,6 +13,7 @@ import DeleteFlashcardGrid from './DeleteFlashcardGrid';
 import MotivationGrid from './MotivationGrid';
 import ListFlashcardGrid from './ListFlashcardGrid';
 import { Flashcard } from './flashcard';
+import { v4 as uuidv4 } from 'uuid';
 
 function Grid2() {
     return (
@@ -87,10 +88,23 @@ export default function SideMenu() {
 
     const [flashcards, setFlashcards] = useState<Flashcard[]>([]);
 
-    function handleFlashcardsChange(flashcard: Flashcard) { 
-        flashcard.id ? setFlashcards([...flashcards.filter(x => x.id !== flashcard.id), flashcard]) : setFlashcards([...flashcards, flashcard]);
+    function handleFlashcardAdd(flashcard: Flashcard) {
+        if (flashcard.id) {
+            setFlashcards([...flashcards, { ...flashcard, id: uuidv4() }]);
+        }
     }
 
+    function handleFlashcardEdit(flashcard: Flashcard) {
+        if (flashcard.id) {
+            setFlashcards([...flashcards.filter(x => x.id !== flashcard.id), flashcard]);
+        }
+    }
+
+    function handleFlashcardDelete(flashcard: Flashcard) {
+        if (flashcard.id) {
+            setFlashcards([...flashcards.filter(x => x.id !== flashcard.id)]);
+        }
+    }
 
     useEffect(() => {
         axios.get<Flashcard[]>("http://localhost:5000/api/flashcards").then(response => {
@@ -98,16 +112,22 @@ export default function SideMenu() {
         })
     }, []);
 
+
+
     const changeGrid = () => {
         switch (status) {
             case "About": return <AboutGrid />;
             case "Test": return <Grid2 />;
-            case "Add Flashcard": return <AddFlashcardGrid flashcards={flashcards} />;
-            case "Delete Flashcard": return <DeleteFlashcardGrid />;
+            case "Add Flashcard": return <AddFlashcardGrid
+                flashcards={flashcards}
+                handleFlashcardAdd={handleFlashcardAdd} />;
+            case "Delete Flashcard": return <DeleteFlashcardGrid
+                flashcards={flashcards}
+                handleFlashcardDelete={handleFlashcardDelete} />;
 
             case "List Flashcards": return <ListFlashcardGrid
                 flashcards={flashcards}
-                handleFlashcardsChange={handleFlashcardsChange}
+                handleFlashcardsChange={handleFlashcardEdit}
             />;
             case "Motivation": return <MotivationGrid />;
 
