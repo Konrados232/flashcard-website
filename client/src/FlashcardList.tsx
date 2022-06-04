@@ -17,7 +17,10 @@ export default function FlashcardList({ flashcards, handleCurrentFlashcard }: Pr
 
             {flashcards.map(flashcard => (
                 <Card variant="outlined">
-                    <FlashcardCard flashcard={flashcard} handleCurrentFlashcard={handleCurrentFlashcard} />
+                    <FlashcardCard
+                        flashcard={flashcard}
+                        handleCurrentFlashcard={handleCurrentFlashcard}
+                        showButtons={true} />
                 </Card>
             ))}
 

@@ -7,9 +7,10 @@ import { Button, CardActions, CardContent, Typography } from '@mui/material';
 interface Props {
     flashcard: Flashcard;
     handleCurrentFlashcard: (id: string) => void;
+    showButtons: boolean;
 }
 
-export default function FlashcardCard({ flashcard, handleCurrentFlashcard }: Props) {
+export default function FlashcardCard({ flashcard, handleCurrentFlashcard, showButtons }: Props) {
 
     return (
         <ThemeProvider theme={darkTheme}>
@@ -29,7 +30,7 @@ export default function FlashcardCard({ flashcard, handleCurrentFlashcard }: Pro
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button onClick={() => handleCurrentFlashcard(flashcard.id)} size="small">Edit</Button>
+                    {showButtons ?<Button onClick={() => handleCurrentFlashcard(flashcard.id)} size="small">Edit</Button> : "" }
                 </CardActions>
             </React.Fragment>
         </ThemeProvider>

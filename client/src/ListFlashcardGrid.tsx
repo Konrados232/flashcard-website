@@ -53,6 +53,7 @@ export default function ListFlashcardGrid({ flashcards, handleFlashcardsChange }
 
     function handleEdit() {
         handleFlashcardsChange(tempFlashcard);
+        setCurrentFlashcard(tempFlashcard);
     }
 
 
