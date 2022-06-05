@@ -6,14 +6,14 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { ThemeProvider } from '@mui/material/styles';
-import { darkTheme } from './darkTheme';
+import { darkTheme } from '../themes/darkTheme';
 
 function MotivatedImage() {
     return (
         <div>
             <Avatar
                 alt="Motivated"
-                src={require("./assets/MotivatedVergil.jpg")}
+                src={require("../../assets/MotivatedVergil.jpg")}
                 sx={{ width: "50%", height: "50%", margin: "auto" }}
                 variant="square"
             />
@@ -26,7 +26,7 @@ function UnmotivatedImage() {
         <div>
             <Avatar
                 alt="Unmotivated"
-                src={require("./assets/UnmotivatedVergil.jpg")}
+                src={require("../../assets/UnmotivatedVergil.jpg")}
                 sx={{ width: "50%", height: "50%", margin: "auto" }}
                 variant="square"
             />

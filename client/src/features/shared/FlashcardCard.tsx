@@ -1,7 +1,7 @@
 import React from 'react';
 import { ThemeProvider } from '@mui/material/styles';
-import { darkTheme } from './darkTheme';
-import { Flashcard } from './flashcard';
+import { darkTheme } from '../themes/darkTheme';
+import { Flashcard } from '../../api/flashcard';
 import { Button, CardActions, CardContent, Typography } from '@mui/material';
 
 interface Props {

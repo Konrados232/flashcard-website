@@ -5,16 +5,16 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import { darkTheme } from './darkTheme';
-import MainGrid from './MainGrid';
-import AboutGrid from './AboutGrid';
-import AddFlashcardGrid from './AddFlashcardGrid';
-import DeleteFlashcardGrid from './DeleteFlashcardGrid';
-import MotivationGrid from './MotivationGrid';
-import ListFlashcardGrid from './ListFlashcardGrid';
-import { Flashcard } from './flashcard';
+import { darkTheme } from '../themes/darkTheme';
+import MainGrid from '../../MainGrid';
+import AboutGrid from '../about/AboutGrid';
+import AddFlashcardGrid from '../add/AddFlashcardGrid';
+import DeleteFlashcardGrid from '../delete/DeleteFlashcardGrid';
+import MotivationGrid from '../motivation/MotivationGrid';
+import ListFlashcardGrid from '../list/ListFlashcardGrid';
+import { Flashcard } from '../../api/flashcard';
 import { v4 as uuidv4 } from 'uuid';
-import handler from './APIhandler';
+import handler from '../../api/APIhandler';
 
 function Grid2() {
     return (
@@ -161,7 +161,7 @@ export default function SideMenu() {
                 sx={{ mr: 2 }}
                 onClick={toggleSideMenu(true)}>
 
-                <img src={require("./assets/EpicMenu.png")}
+                <img src={require("../../assets/EpicMenu.png")}
                     width="100"
                     height="50" />
 

@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { darkTheme } from './darkTheme';
+import { darkTheme } from './features/themes/darkTheme';
 import { useDemoData } from '@mui/x-data-grid-generator';
 import { DataGrid } from '@mui/x-data-grid';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';

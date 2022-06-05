@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
-import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { ThemeProvider } from '@mui/material/styles';
-import { darkTheme } from './darkTheme';
-import { lightTheme } from './lightTheme';
-import { Flashcard } from './flashcard';
-import FlashcardCard from './FlashcardCard';
+import { darkTheme } from '../themes/darkTheme';
+import { lightTheme } from '../themes/lightTheme';
+import { Flashcard } from '../../api/flashcard';
+import FlashcardCard from '../shared/FlashcardCard';
 import { Grid } from '@mui/material';
-import FlashcardList from './FlashcardList';
+import FlashcardList from '../list/FlashcardList';
 
 interface Props {
     flashcards: Flashcard[];

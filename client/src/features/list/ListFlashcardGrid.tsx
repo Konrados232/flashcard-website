@@ -3,10 +3,10 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import { ThemeProvider } from '@mui/material/styles';
-import { darkTheme } from './darkTheme';
-import { Flashcard } from './flashcard';
+import { darkTheme } from '../themes/darkTheme';
+import { Flashcard } from '../../api/flashcard';
 import FlashcardList from './FlashcardList';
-import FlashcardEditForm from './FlashcardEditForm';
+import FlashcardEditForm from '../edit/FlashcardEditForm';
 
 interface Props {
     flashcards: Flashcard[];

@@ -1,20 +1,18 @@
 import React from 'react';
 import AppBar from '@mui/material/AppBar';
-import { Avatar, Badge, Box, Divider, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
+import { Avatar, Badge, Box, IconButton, Menu, MenuItem } from '@mui/material';
 import Toolbar from '@mui/material/Toolbar';
 import { ThemeProvider } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import { darkTheme } from './darkTheme';
+import { darkTheme } from '../themes/darkTheme';
+import StyledInputBase from './StyledInputBase';
+import { yellow } from '@mui/material/colors';
+import SideMenu from '../sideMenu/SideMenu';
 import Search from './Search';
 import SearchIconWrapper from './SearchIconWrapper';
-import StyledInputBase from './StyledInputBase';
-import CardMedia from '@mui/material/CardMedia';
-import { deepPurple, purple, yellow } from '@mui/material/colors';
-import SideMenu from './SideMenu';
-
 
 export default function NavBar() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);

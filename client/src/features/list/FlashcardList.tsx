@@ -1,9 +1,9 @@
 import React from 'react';
 import { ThemeProvider } from '@mui/material/styles';
-import { darkTheme } from './darkTheme';
-import { Flashcard } from './flashcard';
+import { darkTheme } from '../themes/darkTheme';
+import { Flashcard } from '../../api/flashcard';
 import { Card } from '@mui/material';
-import FlashcardCard from './FlashcardCard';
+import FlashcardCard from '../shared/FlashcardCard';
 
 interface Props {
     flashcards: Flashcard[];

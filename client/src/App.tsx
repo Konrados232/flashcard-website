@@ -1,7 +1,7 @@
 import React from 'react';
-import NavBar from './NavBar';
+import NavBar from './features/navBar/NavBar';
 import MainGrid from './MainGrid';
-import SideMenu from './SideMenu';
+import SideMenu from './features/sideMenu/SideMenu';
 
 function App() {
     return (

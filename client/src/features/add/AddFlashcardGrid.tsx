@@ -1,32 +1,48 @@
 import React, { ChangeEvent, useState } from 'react';
-import { ThemeProvider } from '@mui/material/styles';
-import { darkTheme } from './darkTheme';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
-import { Flashcard } from './flashcard';
-import { Avatar, Box, Button, Container, TextField, Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { ThemeProvider } from '@mui/material/styles';
+import { darkTheme } from '../themes/darkTheme';
 import SendIcon from '@mui/icons-material/Send';
+import { Flashcard } from '../../api/flashcard';
 
 interface Props {
     flashcards: Flashcard[];
-    currentFlashcard: Flashcard;
-    tempFlashcard: Flashcard;
-    handleTempFlashcardChange: (flash: Flashcard) => void;
-    handleEdit: () => void;
-    handleCancel: () => void;
+    handleFlashcardAdd: (flashcard: Flashcard) => void;
 }
 
-export default function FlashcardEditForm({ flashcards, currentFlashcard, tempFlashcard, handleTempFlashcardChange, handleEdit, handleCancel }: Props) {
+export default function AddFlashcardGrid({ flashcards, handleFlashcardAdd }: Props) {
+
+    const initFlashcard = {
+        id: " ",
+        title: " ",
+        date: " ",
+        description: " ",
+        content: " "
+    }
+
+    const [tempFlashcard, setTempFlashcard] = useState<Flashcard>(initFlashcard);
 
     function handleChange(event: ChangeEvent<HTMLInputElement>) {
         const { name, value } = event.target;
         if (value === undefined) {
             return;
         }
-        
+
         let changedFlashcard = { ...tempFlashcard, [name]: value };
 
-        handleTempFlashcardChange(changedFlashcard);
+        setTempFlashcard(changedFlashcard);
     }
+
+    function resetTempFlashcard() {
+        setTempFlashcard(initFlashcard);
+    }
+
 
     return (
         <ThemeProvider theme={darkTheme}>
@@ -43,14 +59,13 @@ export default function FlashcardEditForm({ flashcards, currentFlashcard, tempFl
                 >
                     <Avatar
                         alt="A"
-                        src={require("./assets/epic.png")}
+                        src={require("../../assets/epic.png")}
                         sx={{ width: 70, height: 70 }}
                         variant="square"
                     />
 
                     <Typography component="h1" variant="h5">
-                        Edit flashcard
-                        {currentFlashcard?.title}
+                        Add flashcard
                     </Typography>
 
 
@@ -63,6 +78,7 @@ export default function FlashcardEditForm({ flashcards, currentFlashcard, tempFl
                         autoComplete="off"
                         alignItems="center"
                         justifyContent="center"
+
                     >
                         <div>
                             <TextField
@@ -92,16 +108,31 @@ export default function FlashcardEditForm({ flashcards, currentFlashcard, tempFl
                                 value={tempFlashcard?.description}
                                 onChange={handleChange}
                             />
+                            {/* TO-DO add datepicker
+                            <TextField
+                                required
+                                id="flashcard-date"
+                                label="Date"
+                                defaultValue=" "
+                                name="date"
+                                value={tempFlashcard?.date}
+                                onChange={handleChange}
+                            /> */}
                         </div>
 
                     </Box>
 
-                    <Button onClick={() => handleEdit()} variant="contained" endIcon={<SendIcon />}>
-                        Edit Flashcard
+                    <Button
+                        variant="contained"
+                        endIcon={<SendIcon />}
+                        onClick={() => handleFlashcardAdd(tempFlashcard)}>
+                        Add Flashcard
                     </Button>
-
-                    <Button onClick={() => handleCancel()} variant="contained" sx={{ backgroundColor: "red" }}>
-                        Cancel
+                        <br></br>
+                    <Button
+                        variant="contained"
+                        onClick={() => resetTempFlashcard()}>
+                        Reset
                     </Button>
 
                 </Box>
