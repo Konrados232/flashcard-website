@@ -14,6 +14,7 @@ import MotivationGrid from './MotivationGrid';
 import ListFlashcardGrid from './ListFlashcardGrid';
 import { Flashcard } from './flashcard';
 import { v4 as uuidv4 } from 'uuid';
+import handler from './APIhandler';
 
 function Grid2() {
     return (
@@ -87,28 +88,43 @@ export default function SideMenu() {
 
 
     const [flashcards, setFlashcards] = useState<Flashcard[]>([]);
+    const [submitStatus, setSubmitStatus] = useState(false);
 
     function handleFlashcardAdd(flashcard: Flashcard) {
-        if (flashcard.id) {
-            setFlashcards([...flashcards, { ...flashcard, id: uuidv4() }]);
-        }
+        setSubmitStatus(true);
+
+        // TO-DO temp date for now
+        let newFlashcard = { ...flashcard, id: uuidv4(), date: "2022-06-04T19:23:42.362" };
+        
+        handler.Flashcards.post(newFlashcard).then(() => {
+            setFlashcards([...flashcards, newFlashcard]);
+            setSubmitStatus(false);
+        })
     }
 
     function handleFlashcardEdit(flashcard: Flashcard) {
+        setSubmitStatus(true);
         if (flashcard.id) {
-            setFlashcards([...flashcards.filter(x => x.id !== flashcard.id), flashcard]);
+            handler.Flashcards.put(flashcard).then(() => {
+                setFlashcards([...flashcards.filter(x => x.id !== flashcard.id), flashcard]);
+                setSubmitStatus(false);
+            })
         }
     }
 
     function handleFlashcardDelete(flashcard: Flashcard) {
+        setSubmitStatus(true);
         if (flashcard.id) {
-            setFlashcards([...flashcards.filter(x => x.id !== flashcard.id)]);
+            handler.Flashcards.delete(flashcard.id).then(() => {
+                setFlashcards([...flashcards.filter(x => x.id !== flashcard.id)]);
+                setSubmitStatus(false);
+            })
         }
     }
 
     useEffect(() => {
-        axios.get<Flashcard[]>("http://localhost:5000/api/flashcards").then(response => {
-            setFlashcards(response.data);
+        handler.Flashcards.list().then(response => {
+            setFlashcards(response);
         })
     }, []);
 
@@ -145,7 +161,7 @@ export default function SideMenu() {
                 sx={{ mr: 2 }}
                 onClick={toggleSideMenu(true)}>
 
-                <img src={require("./assets/a.png")}
+                <img src={require("./assets/EpicMenu.png")}
                     width="100"
                     height="50" />
 

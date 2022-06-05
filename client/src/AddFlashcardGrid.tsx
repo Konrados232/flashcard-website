@@ -108,7 +108,7 @@ export default function AddFlashcardGrid({ flashcards, handleFlashcardAdd }: Pro
                                 value={tempFlashcard?.description}
                                 onChange={handleChange}
                             />
-                            {/* TO-DO add datepicker */}
+                            {/* TO-DO add datepicker
                             <TextField
                                 required
                                 id="flashcard-date"
@@ -117,7 +117,7 @@ export default function AddFlashcardGrid({ flashcards, handleFlashcardAdd }: Pro
                                 name="date"
                                 value={tempFlashcard?.date}
                                 onChange={handleChange}
-                            />
+                            /> */}
                         </div>
 
                     </Box>
