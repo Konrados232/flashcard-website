@@ -19,6 +19,15 @@ namespace Persistence
 			
 			await dataContext.Flashcards.AddRangeAsync(flashcards); // adding
 			await dataContext.SaveChangesAsync(); // saving database
+			
+			var languageFlashcards = new List<LanguageFlashcard>();
+			languageFlashcards.Add(new LanguageFlashcard(Guid.NewGuid(), "LanguageSample", DateTime.Now.AddDays(1), Languages.POLISH, Languages.ENGLISH, "Witam", "Welcome", "ok"));
+			languageFlashcards.Add(new LanguageFlashcard(Guid.NewGuid(), "LanguageSample2", DateTime.Now.AddDays(2), Languages.POLISH, Languages.ENGLISH, "Obiad", "Dinner", "ok2"));
+			languageFlashcards.Add(new LanguageFlashcard(Guid.NewGuid(), "LanguageSample3", DateTime.Now.AddDays(3), Languages.ENGLISH, Languages.POLISH, "Chicken", "Kurczak", "ok3"));
+			languageFlashcards.Add(new LanguageFlashcard(Guid.NewGuid(), "LanguageSample4", DateTime.Now.AddDays(4), Languages.ENGLISH, Languages.POLISH, "Something", "Coś", "ok4"));
+			
+			await dataContext.LanguageFlashcards.AddRangeAsync(languageFlashcards); // adding
+			await dataContext.SaveChangesAsync(); // saving database
 		}
 	}
 }
