@@ -52,9 +52,9 @@ export default function AddFlashcardGrid({ flashcards, handleFlashcardAdd }: Pro
                 <Box
                     sx={{
                         marginTop: 8,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
                     }}
                 >
                     <Avatar
@@ -128,7 +128,7 @@ export default function AddFlashcardGrid({ flashcards, handleFlashcardAdd }: Pro
                         onClick={() => handleFlashcardAdd(tempFlashcard)}>
                         Add Flashcard
                     </Button>
-                        <br></br>
+                    <br></br>
                     <Button
                         variant="contained"
                         onClick={() => resetTempFlashcard()}>

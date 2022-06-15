@@ -6,7 +6,7 @@ import SideMenu from './features/sideMenu/SideMenu';
 function App() {
     return (
         <div className="App">
-            
+            <NavBar />
             <SideMenu />
 
               

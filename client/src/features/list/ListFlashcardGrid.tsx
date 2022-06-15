@@ -7,6 +7,7 @@ import { darkTheme } from '../themes/darkTheme';
 import { Flashcard } from '../../api/flashcard';
 import FlashcardList from './FlashcardList';
 import FlashcardEditForm from '../edit/FlashcardEditForm';
+import { Box } from '@mui/material';
 
 interface Props {
     flashcards: Flashcard[];
@@ -67,16 +68,18 @@ export default function ListFlashcardGrid({ flashcards, handleFlashcardsChange }
                             container
                             direction="column"
                             justifyContent="center"
-                            alignItems="center"
+                            alignItems="stretch"
                         >
-                            <Grid item xs={8}>
-                                First for test
-                            </Grid>
 
-                            <FlashcardList
-                                flashcards={flashcards}
-                                handleCurrentFlashcard={handleCurrentFlashcard}
-                            />
+
+                            <Box
+                                style={{ maxHeight: "75vh", maxWidth: "120vh", overflow: "scroll" }}>
+
+                                <FlashcardList
+                                    flashcards={flashcards}
+                                    handleCurrentFlashcard={handleCurrentFlashcard}
+                                />
+                            </Box>
 
                         </Grid>
 
@@ -92,9 +95,6 @@ export default function ListFlashcardGrid({ flashcards, handleFlashcardsChange }
                             handleCancel={handleCancel}
                         />
 
-                    </Grid>
-                    <Grid item xs>
-                        Test
                     </Grid>
                 </Grid>
 

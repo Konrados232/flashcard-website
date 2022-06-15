@@ -7,7 +7,7 @@ import { darkTheme } from '../themes/darkTheme';
 import { lightTheme } from '../themes/lightTheme';
 import { Flashcard } from '../../api/flashcard';
 import FlashcardCard from '../shared/FlashcardCard';
-import { Grid } from '@mui/material';
+import { Avatar, Box, Grid } from '@mui/material';
 import FlashcardList from '../list/FlashcardList';
 
 interface Props {
@@ -29,13 +29,18 @@ export default function DeleteFlashcardGrid({ flashcards, handleFlashcardDelete 
 
     const [currentFlashcard, setCurrentFlashcard] = useState<Flashcard>(initFlashcard);
 
+    const [isSelected, setIsSelected] = useState<boolean>(false);
+
+
     function handleCancel() {
         setCurrentFlashcard(initFlashcard);
+        setIsSelected(false);
     }
 
     function handleDelete() {
         handleFlashcardDelete(currentFlashcard);
         setCurrentFlashcard(initFlashcard);
+        setIsSelected(false);
     }
 
     function handleCurrentFlashcard(id: string) {
@@ -45,7 +50,70 @@ export default function DeleteFlashcardGrid({ flashcards, handleFlashcardDelete 
         } else {
             setCurrentFlashcard(foundFlashcard);
         }
+        setIsSelected(true);
     }
+
+    function flashcardNotSelectedForm() {
+        return (
+            <Box
+                sx={{
+                    marginTop: 8,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                }}
+            >
+                <Avatar
+                    alt="A"
+                    src={require("../../assets/trash-can.png")}
+                    sx={{ width: 70, height: 70 }}
+                    variant="square"
+                />
+                <br></br>
+                Select Flashcard To Delete
+
+            </Box >
+        )
+    }
+
+    function flashcardDeleteForm() {
+        return (
+            <Box
+                sx={{
+                    marginTop: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                }}
+            >
+                <FlashcardCard
+                    flashcard={currentFlashcard}
+                    handleCurrentFlashcard={handleCurrentFlashcard}
+                    showButtons={false}
+                />
+                <Grid
+                    container
+                    direction="row"
+                    justifyContent="space-evenly"
+                    alignItems="center"
+                >
+                    <Grid item>
+                        <Button onClick={() => handleDelete()} size="large" variant="contained" sx={{ backgroundColor: "red" }}>
+                            DELETE
+                        </Button>
+                    </Grid>
+                    <Grid item>
+                        <Button onClick={() => handleCancel()} size="large" variant="contained" sx={{ backgroundColor: "red" }}>
+                            Cancel
+                        </Button>
+                    </Grid>
+                </Grid>
+
+            </Box>
+        );
+    }
+
+
 
     return (
         <ThemeProvider theme={darkTheme}>
@@ -57,40 +125,23 @@ export default function DeleteFlashcardGrid({ flashcards, handleFlashcardDelete 
                             container
                             direction="column"
                             justifyContent="center"
-                            alignItems="center"
+                            alignItems="stretch"
                         >
-                            <Grid item xs={8}>
-                                First for test
-                            </Grid>
+                            <Box
+                                style={{ maxHeight: "75vh", maxWidth: "120vh", overflow: "scroll" }}>
 
-                            <FlashcardList
-                                flashcards={flashcards}
-                                handleCurrentFlashcard={handleCurrentFlashcard}
-                            />
+                                <FlashcardList
+                                    flashcards={flashcards}
+                                    handleCurrentFlashcard={handleCurrentFlashcard}
+                                />
+                            </Box>
+
 
                         </Grid>
 
                     </Grid>
                     <Grid item xs>
-
-                        <FlashcardCard
-                            flashcard={currentFlashcard}
-                            handleCurrentFlashcard={handleCurrentFlashcard}
-                            showButtons={false}
-                        />
-
-                        <Button onClick={() => handleDelete()} variant="contained" sx={{ backgroundColor: "red" }}>
-                            DELETE
-                        </Button>
-
-
-                        <Button onClick={() => handleCancel()} variant="contained" sx={{ backgroundColor: "red" }}>
-                            Cancel
-                        </Button>
-
-                    </Grid>
-                    <Grid item xs>
-                        Test
+                        {isSelected ? flashcardDeleteForm() : flashcardNotSelectedForm()}
                     </Grid>
                 </Grid>
 

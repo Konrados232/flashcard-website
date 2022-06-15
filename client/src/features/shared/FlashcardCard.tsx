@@ -16,7 +16,7 @@ export default function FlashcardCard({ flashcard, handleCurrentFlashcard, showB
         <ThemeProvider theme={darkTheme}>
             <React.Fragment>
                 <CardContent>
-                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                    <Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
                         {flashcard.title}
                     </Typography>
                     <Typography variant="h5" component="div">
