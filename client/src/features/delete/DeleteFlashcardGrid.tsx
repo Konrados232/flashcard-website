@@ -117,7 +117,7 @@ export default function DeleteFlashcardGrid({ flashcards, handleFlashcardDelete 
 
     return (
         <ThemeProvider theme={darkTheme}>
-            <Container component="main" maxWidth="lg">
+            <Container component="main" maxWidth="lg" sx={{ marginTop: 5 }}>
                 <CssBaseline />
                 <Grid container spacing={3}>
                     <Grid item xs={8}>

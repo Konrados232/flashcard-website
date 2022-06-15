@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import { Avatar, Badge, Box, IconButton, Menu, MenuItem } from '@mui/material';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,7 +14,12 @@ import SideMenu from '../sideMenu/SideMenu';
 import Search from './Search';
 import SearchIconWrapper from './SearchIconWrapper';
 
-export default function NavBar() {
+interface Props {
+    toggleSideMenu: any;
+}
+
+
+export default function NavBar({toggleSideMenu} : Props) {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -114,13 +119,25 @@ export default function NavBar() {
         </Menu>
     );
 
+   
+    
 
     return (
         <ThemeProvider theme={darkTheme}>
             <AppBar position="sticky" color="primary" enableColorOnDark>
                 <Toolbar>
+                    <IconButton
+                        size="large"
+                        edge="start"
+                        color="inherit"
+                        sx={{ mr: 2 }}
+                        onClick={toggleSideMenu(true)}>
 
-                    <SideMenu />
+                        <img src={require("../../assets/cards.png")}
+                            width="70"
+                            height="50" />
+
+                    </IconButton>
 
                     <Search theme={darkTheme}>
                         <SearchIconWrapper>
@@ -142,10 +159,10 @@ export default function NavBar() {
                             onClick={handleProfileMenuOpen}
                             color="inherit"
                         >
-                            <Avatar sx={{ bgcolor: yellow[500]}}>ME</Avatar>
+                            <Avatar sx={{ bgcolor: yellow[500] }}>ME</Avatar>
                         </IconButton>
                     </Box>
-                   
+
 
                 </Toolbar>
             </AppBar>

@@ -59,7 +59,7 @@ export default function AddFlashcardGrid({ flashcards, handleFlashcardAdd }: Pro
                 >
                     <Avatar
                         alt="A"
-                        src={require("../../assets/epic.png")}
+                        src={require("../../assets/add.png")}
                         sx={{ width: 70, height: 70 }}
                         variant="square"
                     />

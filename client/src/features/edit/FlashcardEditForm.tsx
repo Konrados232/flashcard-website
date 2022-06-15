@@ -43,7 +43,7 @@ export default function FlashcardEditForm({ flashcards, currentFlashcard, tempFl
                 >
                     <Avatar
                         alt="Add"
-                        src={require("../../assets/epic.png")}
+                        src={require("../../assets/pencil.png")}
                         sx={{ width: 70, height: 70 }}
                         variant="square"
                     />
