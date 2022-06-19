@@ -12,7 +12,7 @@ Front-end:
 * Utilizes Material UI library to add new stylized components on top of React's ones.
 * Uses axios for communicating with back-end's API.
 
-https://user-images.githubusercontent.com/25458415/174494475-834898d6-a036-40fa-ad08-3e63d46cf5d0.png
+
 ## Gallery
 <p align="center">
   <img align="center" src="https://user-images.githubusercontent.com/25458415/174494475-834898d6-a036-40fa-ad08-3e63d46cf5d0.png" width="500"/>
